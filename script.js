@@ -7,3 +7,6 @@ const Gameboard = (function() {
     return { getBoard, setField };
 })();
 
+const Player = (name, marker) => {
+    return { name, marker };
+};
