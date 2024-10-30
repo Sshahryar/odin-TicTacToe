@@ -1,6 +1,5 @@
 const Gameboard = (function() {
     const board = ['', '', '', '', '', '', '', '', ''];
-
     const getBoard = () => board;
     const setField = (index, value) => { board[index] = value; };
     return { getBoard, setField };
@@ -53,11 +52,11 @@ const GameController = (function() {
     return { makeMove, getCurrentPlayer };
 })();
 
-//Sample test game
 GameController.makeMove(0);
 GameController.makeMove(1);
 GameController.makeMove(4);
 GameController.makeMove(2);
 GameController.makeMove(8);
+
 
 
