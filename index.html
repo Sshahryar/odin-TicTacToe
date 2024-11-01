@@ -3,35 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> odin-TicTacToe</title>
+    <title>Tic Tac Toe</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .gameboard {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            max-width: 300px;
-            margin: 50px auto;
-            border: 2px solid #333;
-        }
-        .cell {
-            width: 100px;
-            height: 100px;
-            background-color: #fff;
-            border: 1px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
-    <h1>odin - Tic-Tac-Toe</h1>
-    <div class="gameboard">
+    <h1>Tic Tac Toe</h1>
+    <div id="gameboard">
         <div class="cell" data-index="0"></div>
         <div class="cell" data-index="1"></div>
         <div class="cell" data-index="2"></div>
@@ -42,7 +20,9 @@
         <div class="cell" data-index="7"></div>
         <div class="cell" data-index="8"></div>
     </div>
+    <button id="reset">Reset Game</button>
     <script src="game.js"></script>
 </body>
 </html>
+
 
