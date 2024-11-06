@@ -52,11 +52,19 @@ const GameController = (function() {
     return { makeMove, getCurrentPlayer };
 })();
 
-GameController.makeMove(0);
-GameController.makeMove(1);
-GameController.makeMove(4);
-GameController.makeMove(2);
-GameController.makeMove(8);
+document.querySelectorAll('.cell').forEach(cell => {
+    cell.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        GameController.makeMove(index);
+        e.target.textContent = Gameboard.getBoard()[index];
+    });
+});
+
+document.getElementById('reset').addEventListener('click', () => {
+    Gameboard.getBoard().fill('');
+    document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
+});
+
 
 
 
