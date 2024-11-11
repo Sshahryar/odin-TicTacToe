@@ -19,17 +19,19 @@ const GameController = (function() {
     };
 
     const makeMove = (index) => {
-        if (Gameboard.getBoard()[index] === '') {
-            Gameboard.setField(index, currentPlayer.marker);
-            if (checkWinner()) {
-                console.log(`${currentPlayer.name} wins!`);
-            } else if (checkTie()) {
-                console.log("It's a tie!");
-            } else {
-                switchPlayer();
-            }
+    if (Gameboard.getBoard()[index] === '') {
+        Gameboard.setField(index, currentPlayer.marker);
+        if (checkWinner()) {
+            document.getElementById('message').textContent = `${currentPlayer.name} wins!`;
+        } else if (checkTie()) {
+            document.getElementById('message').textContent = "It's a tie!";
+        } else {
+            switchPlayer();
+            document.getElementById('message').textContent = `${GameController.getCurrentPlayer().name}'s turn`;
         }
-    };
+    }
+};
+
 
     const checkWinner = () => {
         const board = Gameboard.getBoard();
