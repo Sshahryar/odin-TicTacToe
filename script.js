@@ -62,11 +62,9 @@ document.querySelectorAll('.cell').forEach(cell => {
     });
 });
 
-document.getElementById('reset').addEventListener('click', () => {
-    Gameboard.getBoard().fill('');
-    document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
+document.getElementById('reset').addEventListener('click', () => { 
+    Gameboard.getBoard().fill(''); 
+    document.querySelectorAll('.cell').forEach(cell => cell.textContent = ''); 
+    document.getElementById('message').textContent = "Player X's turn"; 
+    GameController.reset();
 });
-
-
-
-
