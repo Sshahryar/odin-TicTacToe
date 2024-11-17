@@ -68,3 +68,10 @@ document.getElementById('reset').addEventListener('click', () => {
     document.getElementById('message').textContent = "Player X's turn"; 
     GameController.reset();
 });
+
+const playSound = (sound) => {
+    const audio = new Audio(sound);
+    audio.play();
+};
+
+playSound('move-sound.mp3'); //Sample entry for now
