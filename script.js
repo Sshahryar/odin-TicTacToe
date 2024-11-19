@@ -19,19 +19,19 @@ const GameController = (function() {
     };
 
     const makeMove = (index) => {
-    if (Gameboard.getBoard()[index] === '') {
-        Gameboard.setField(index, currentPlayer.marker);
-        if (checkWinner()) {
-            document.getElementById('message').textContent = `${currentPlayer.name} wins!`;
-        } else if (checkTie()) {
-            document.getElementById('message').textContent = "It's a tie!";
-        } else {
-            switchPlayer();
-            document.getElementById('message').textContent = `${GameController.getCurrentPlayer().name}'s turn`;
+        if (Gameboard.getBoard()[index] === '') {
+            Gameboard.setField(index, currentPlayer.marker);
+            document.querySelector(`[data-index="${index}"]`).textContent = currentPlayer.marker;
+            if (checkWinner()) {
+                document.getElementById('message').textContent = `${currentPlayer.name} wins!`;
+            } else if (checkTie()) {
+                document.getElementById('message').textContent = "It's a tie!";
+            } else {
+                switchPlayer();
+                document.getElementById('message').textContent = `${currentPlayer.name}'s turn`;
+            }
         }
-    }
-};
-
+    };
 
     const checkWinner = () => {
         const board = Gameboard.getBoard();
@@ -50,28 +50,25 @@ const GameController = (function() {
         return Gameboard.getBoard().every(cell => cell !== '');
     };
 
+    const reset = () => {
+        currentPlayer = playerX;
+        Gameboard.getBoard().fill('');
+        document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
+        document.getElementById('message').textContent = "Player X's turn";
+    };
+
     const getCurrentPlayer = () => currentPlayer;
-    return { makeMove, getCurrentPlayer };
+    return { makeMove, getCurrentPlayer, reset };
 })();
 
 document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('click', (e) => {
         const index = e.target.getAttribute('data-index');
         GameController.makeMove(index);
-        e.target.textContent = Gameboard.getBoard()[index];
     });
 });
 
-document.getElementById('reset').addEventListener('click', () => { 
-    Gameboard.getBoard().fill(''); 
-    document.querySelectorAll('.cell').forEach(cell => cell.textContent = ''); 
-    document.getElementById('message').textContent = "Player X's turn"; 
+document.getElementById('reset').addEventListener('click', () => {
     GameController.reset();
 });
 
-const playSound = (sound) => {
-    const audio = new Audio(sound);
-    audio.play();
-};
-
-playSound('move-sound.mp3'); //Sample entry for now
