@@ -2,7 +2,8 @@ const Gameboard = (function() {
     const board = ['', '', '', '', '', '', '', '', ''];
     const getBoard = () => board;
     const setField = (index, value) => { board[index] = value; };
-    return { getBoard, setField };
+    const reset = () => { board.fill(''); };
+    return { getBoard, setField, reset };
 })();
 
 const Player = (name, marker) => {
@@ -50,15 +51,14 @@ const GameController = (function() {
         return Gameboard.getBoard().every(cell => cell !== '');
     };
 
-    const reset = () => {
+    const resetGame = () => {
         currentPlayer = playerX;
-        Gameboard.getBoard().fill('');
+        Gameboard.reset();
         document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
         document.getElementById('message').textContent = "Player X's turn";
     };
 
-    const getCurrentPlayer = () => currentPlayer;
-    return { makeMove, getCurrentPlayer, reset };
+    return { makeMove, resetGame };
 })();
 
 document.querySelectorAll('.cell').forEach(cell => {
@@ -69,6 +69,6 @@ document.querySelectorAll('.cell').forEach(cell => {
 });
 
 document.getElementById('reset').addEventListener('click', () => {
-    GameController.reset();
+    GameController.resetGame();
 });
 
