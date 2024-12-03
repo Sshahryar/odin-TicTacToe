@@ -11,9 +11,18 @@ const Player = (name, marker) => {
 };
 
 const GameController = (function() {
-    const playerX = Player('Player X', 'X');
-    const playerO = Player('Player O', 'O');
+    let playerX = Player('Player X', 'X');
+    let playerO = Player('Player O', 'O');
     let currentPlayer = playerX;
+
+    const startGame = () => {
+        const playerXName = document.getElementById('playerXName').value || 'Player X';
+        const playerOName = document.getElementById('playerOName').value || 'Player O';
+        playerX = Player(playerXName, 'X');
+        playerO = Player(playerOName, 'O');
+        currentPlayer = playerX;
+        document.getElementById('message').textContent = `${currentPlayer.name}'s turn`;
+    };
 
     const switchPlayer = () => {
         currentPlayer = currentPlayer === playerX ? playerO : playerX;
@@ -56,9 +65,10 @@ const GameController = (function() {
         Gameboard.reset();
         document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
         document.getElementById('message').textContent = "Player X's turn";
+        startGame();
     };
 
-    return { makeMove, resetGame };
+    return { makeMove, resetGame, startGame };
 })();
 
 document.querySelectorAll('.cell').forEach(cell => {
@@ -71,4 +81,9 @@ document.querySelectorAll('.cell').forEach(cell => {
 document.getElementById('reset').addEventListener('click', () => {
     GameController.resetGame();
 });
+
+window.onload = () => {
+    GameController.startGame();
+};
+
 
