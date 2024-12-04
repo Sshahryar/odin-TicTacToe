@@ -75,15 +75,18 @@ document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('click', (e) => {
         const index = e.target.getAttribute('data-index');
         GameController.makeMove(index);
+        DisplayController.updateBoard();
     });
 });
 
 document.getElementById('reset').addEventListener('click', () => {
     GameController.resetGame();
+    DisplayController.updateBoard();
 });
 
 window.onload = () => {
     GameController.startGame();
 };
+
 
 
